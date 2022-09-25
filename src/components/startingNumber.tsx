@@ -8,8 +8,8 @@ const StartingNumber = ({ value }: { value: number }) => {
       borderRadius="full"
       bg="yellow.200"
       p="4"
-      h={[12, 12, 16]}
-      w={[12, 12, 16]}
+      h={[12, 14, 16]}
+      w={[12, 14, 16]}
       _hover={{
         background: "yellow.300",
       }}

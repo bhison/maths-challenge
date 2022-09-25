@@ -1,49 +1,25 @@
-import { Box, Container, HStack, Text, VStack } from "@chakra-ui/react";
+import { Button, Container, HStack, VStack } from "@chakra-ui/react";
+import { useState } from "react";
+import Operators from "src/components/operators";
 import SumPane from "src/components/sumPane";
+import { sum } from "types";
 import StartingNumber from "../components/startingNumber";
+import TargetDisplay from "../components/targetDisplay";
 
 const Game = () => {
+  const [currentSum, setCurrentSum] = useState<sum>({
+    leftNumber: undefined,
+    rightNumber: undefined,
+    operator: undefined,
+  });
+
+  const [operatorsEnabled, setOperatorsEnabled] = useState<boolean>(false);
+
   return (
     <Container minW="full" py="4" bg="transparent">
-      <Box
-        pt="2"
-        w="sm"
-        maxW="240px"
-        border="4px"
-        borderStyle="dashed"
-        borderColor="white"
-        shadow="lg"
-        mx="auto"
-        mb="5"
-        bg="whiteAlpha.500"
-        borderRadius="md"
-      >
-        <Text
-          w="full"
-          textAlign="center"
-          fontWeight="bold"
-          bg="transparent"
-          fontFamily="mono"
-          color="green.500"
-          fontSize="xl"
-        >
-          TARGET
-        </Text>
-        <Text
-          bg="transparent"
-          fontSize={"8xl"}
-          w="full"
-          textAlign="center"
-          fontFamily="funt"
-          lineHeight="none"
-          mt="-5"
-          color="red.500"
-        >
-          888
-        </Text>
-      </Box>
-      <Box></Box>
-      <VStack bg="transparent" spacing={[2, 5]}>
+      <VStack bg="transparent" spacing="2">
+        <TargetDisplay />
+        <Operators enabled={operatorsEnabled} />
         <HStack
           mx="auto"
           align="center"
@@ -66,6 +42,9 @@ const Game = () => {
           }}
         />
       </VStack>
+      <Button onClick={() => setOperatorsEnabled(!operatorsEnabled)}>
+        Debug
+      </Button>
     </Container>
   );
 };
