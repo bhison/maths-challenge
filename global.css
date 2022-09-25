@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'funt';
+    src: url('asset/AeroviasBrasilNF.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.funt {
+    font-family: 'funt';
+}
