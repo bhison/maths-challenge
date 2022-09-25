@@ -14,7 +14,7 @@ const SumPane = ({ sum }: { sum: sum }) => {
       p="2"
       fontSize="2xl"
     >
-      Hello you cunts
+      Sum pane here
     </Box>
   );
 };
