@@ -8,3 +8,12 @@
 .funt {
     font-family: 'funt';
 }
+
+html, body {
+    overflow: hidden;
+}
+
+body, html, #__next{
+    background-color: rgb(192, 255, 234) !important;
+
+}

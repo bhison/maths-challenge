@@ -1,23 +1,34 @@
-import { Box, Container, Text } from "@chakra-ui/react";
+import { Box, Container, HStack, Text } from "@chakra-ui/react";
+import StartingNumber from "../components/startingNumber";
 
 const Game = () => {
   return (
-    <Container maxW="container.lg">
+    <Container minW="full" py="4" bg="transparent">
       <Box
         pt="2"
         w="sm"
-        border="1px"
+        maxW="80vw"
+        border="4px"
         borderStyle="dashed"
+        borderColor="white"
         shadow="lg"
         mx="auto"
-        bg="gray.100"
+        mb="5"
+        bg="whiteAlpha.500"
         borderRadius="md"
       >
-        <Text w="full" textAlign="center" fontWeight="bold">
-          Target
+        <Text
+          w="full"
+          textAlign="center"
+          fontWeight="bold"
+          bg="transparent"
+          fontFamily="mono"
+        >
+          TARGET
         </Text>
         <Text
-          fontSize="9xl"
+          bg="transparent"
+          fontSize={["8xl", "9xl", "9xl"]}
           w="full"
           textAlign="center"
           fontFamily="funt"
@@ -25,8 +36,19 @@ const Game = () => {
           mt="-5"
           color="red.500"
         >
-          135
+          888
         </Text>
+      </Box>
+      <Box></Box>
+      <Box bg="transparent">
+        <HStack mx="auto" align="center" justify="center" bg="transparent">
+          <StartingNumber value={100} />
+          <StartingNumber value={75} />
+          <StartingNumber value={8} />
+          <StartingNumber value={3} />
+          <StartingNumber value={10} />
+          <StartingNumber value={6} />
+        </HStack>
       </Box>
     </Container>
   );
