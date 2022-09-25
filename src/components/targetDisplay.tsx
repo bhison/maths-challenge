@@ -11,7 +11,7 @@ const TargetDisplay = () => {
       borderColor="white"
       shadow="lg"
       mx="auto"
-      bg="whiteAlpha.500"
+      bg="whiteAlpha.300"
       borderRadius="md"
     >
       <Text

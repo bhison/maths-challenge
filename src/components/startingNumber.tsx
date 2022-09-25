@@ -1,6 +1,14 @@
 import { Button } from "@chakra-ui/react";
 
-const StartingNumber = ({ value }: { value: number }) => {
+const StartingNumber = ({
+  value,
+  onClick,
+  enabled,
+}: {
+  value: number;
+  onClick: () => void;
+  enabled: boolean;
+}) => {
   return (
     <Button
       border="4px"
@@ -19,6 +27,8 @@ const StartingNumber = ({ value }: { value: number }) => {
       color="yellow.600"
       fontSize={["xl", "2xl", "3xl"]}
       shadow="md"
+      onClick={onClick}
+      disabled={!enabled}
     >
       {value}
     </Button>

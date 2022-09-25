@@ -1,13 +1,17 @@
 import { Button, HStack } from "@chakra-ui/react";
+import InputManager from "helpers/inputManager";
+import { useMemo } from "react";
 import { FaDivide, FaMinus, FaPlus, FaTimes } from "react-icons/fa";
-import { operator } from "types";
+import { operator, sum } from "types";
 
 const OperatorButton = ({
   operator,
   enabled,
+  onSelect,
 }: {
   operator: operator;
   enabled: boolean;
+  onSelect: () => void;
 }) => {
   return (
     <Button
@@ -17,6 +21,7 @@ const OperatorButton = ({
       w={enabled ? ["10", "12", "16"] : ["3", "4"]}
       h={enabled ? ["8", "10", "12"] : ["5", "6"]}
       shadow={"md"}
+      onClick={onSelect}
     >
       {operator === "add" ? (
         <FaPlus />
@@ -33,7 +38,17 @@ const OperatorButton = ({
   );
 };
 
-const Operators = ({ enabled }: { enabled: boolean } = { enabled: false }) => {
+const Operators = ({
+  currentSum,
+  setCurrentSum,
+}: {
+  currentSum: sum;
+  setCurrentSum: (val: sum) => void;
+}) => {
+  const enabled = useMemo(
+    () => !!currentSum.leftNumber && !currentSum.operator,
+    [currentSum]
+  );
   return (
     <HStack
       w="full"
@@ -45,10 +60,22 @@ const Operators = ({ enabled }: { enabled: boolean } = { enabled: false }) => {
       justify="center"
       spacing={enabled ? ["3", "4", "5"] : "1"}
     >
-      <OperatorButton operator={"add"} enabled={enabled} />
-      <OperatorButton operator={"subtract"} enabled={enabled} />
-      <OperatorButton operator={"multiply"} enabled={enabled} />
-      <OperatorButton operator={"divide"} enabled={enabled} />
+      {(["add", "subtract", "multiply", "divide"] as operator[]).map(
+        (operator: operator) => (
+          <OperatorButton
+            key={operator}
+            operator={operator}
+            enabled={enabled}
+            onSelect={() => {
+              InputManager({
+                activeSum: currentSum,
+                setActiveSum: setCurrentSum,
+                inputValue: operator,
+              });
+            }}
+          />
+        )
+      )}
     </HStack>
   );
 };

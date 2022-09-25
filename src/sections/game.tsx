@@ -1,10 +1,11 @@
-import { Button, Container, HStack, VStack } from "@chakra-ui/react";
-import { useState } from "react";
+import { Container, HStack, VStack } from "@chakra-ui/react";
+import InputManager from "helpers/inputManager";
+import { useEffect, useMemo, useState } from "react";
 import Operators from "src/components/operators";
+import StartingNumber from "src/components/startingNumber";
 import SumPane from "src/components/sumPane";
+import TargetDisplay from "src/components/targetDisplay";
 import { sum } from "types";
-import StartingNumber from "../components/startingNumber";
-import TargetDisplay from "../components/targetDisplay";
 
 const Game = () => {
   const [currentSum, setCurrentSum] = useState<sum>({
@@ -12,14 +13,26 @@ const Game = () => {
     rightNumber: undefined,
     operator: undefined,
   });
+  const [gameNumbers, setGameNumbers] = useState<number[]>([
+    100, 75, 2, 4, 10, 1,
+  ]);
 
-  const [operatorsEnabled, setOperatorsEnabled] = useState<boolean>(false);
+  const numbersEnabled = useMemo(
+    () =>
+      !currentSum.leftNumber ||
+      (!!currentSum.leftNumber &&
+        currentSum.operator &&
+        !currentSum.rightNumber),
+    [currentSum]
+  );
+
+  useEffect(() => console.log(currentSum), [currentSum]);
 
   return (
     <Container minW="full" py="4" bg="transparent">
       <VStack bg="transparent" spacing="2">
         <TargetDisplay />
-        <Operators enabled={operatorsEnabled} />
+        <Operators currentSum={currentSum} setCurrentSum={setCurrentSum} />
         <HStack
           mx="auto"
           align="center"
@@ -27,24 +40,24 @@ const Game = () => {
           bg="transparent"
           spacing={[1, 2, 3]}
         >
-          <StartingNumber value={100} />
-          <StartingNumber value={75} />
-          <StartingNumber value={8} />
-          <StartingNumber value={3} />
-          <StartingNumber value={10} />
-          <StartingNumber value={6} />
+          {gameNumbers.map((val: number, index: number) => (
+            <StartingNumber
+              key={index}
+              value={val}
+              enabled={numbersEnabled ?? false}
+              onClick={() =>
+                InputManager({
+                  activeSum: currentSum,
+                  setActiveSum: setCurrentSum,
+                  // We will need to make a number struct so each number entry has an id to be added/removed from play
+                  inputValue: val,
+                })
+              }
+            />
+          ))}
         </HStack>
-        <SumPane
-          sum={{
-            leftNumber: 100,
-            rightNumber: undefined,
-            operator: undefined,
-          }}
-        />
+        <SumPane sum={currentSum} />
       </VStack>
-      <Button onClick={() => setOperatorsEnabled(!operatorsEnabled)}>
-        Debug
-      </Button>
     </Container>
   );
 };
