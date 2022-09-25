@@ -1,5 +1,6 @@
 import { Container, Heading } from "@chakra-ui/react";
 import Head from "next/head";
+import Game from "../src/sections/game";
 
 const IndexPage = () => {
   return (
@@ -8,7 +9,7 @@ const IndexPage = () => {
         <title>Maths Challenge</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Container maxW="container.xl" maxH="100vh" p={0}>
+      <Container maxW="container.xl" h="90vh" my="5vh" p={0}>
         <Heading
           w="full"
           h={20}
@@ -20,6 +21,7 @@ const IndexPage = () => {
         >
           Maths Challenge
         </Heading>
+        <Game />
       </Container>
     </>
   );
