@@ -4,7 +4,7 @@ export type startingNumber = bigStartingNumber | smallStartingNumber;
 export type operator = "multiply" | "divide" | "add" | "subtract";
 
 export type sum = {
-  leftNumber?: number;
+  leftNumber: number;
   rightNumber?: number;
   operator?: operator;
 };

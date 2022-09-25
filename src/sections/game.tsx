@@ -1,4 +1,5 @@
-import { Box, Container, HStack, Text } from "@chakra-ui/react";
+import { Box, Container, HStack, Text, VStack } from "@chakra-ui/react";
+import SumPane from "src/components/sumPane";
 import StartingNumber from "../components/startingNumber";
 
 const Game = () => {
@@ -7,7 +8,7 @@ const Game = () => {
       <Box
         pt="2"
         w="sm"
-        maxW="80vw"
+        maxW="240px"
         border="4px"
         borderStyle="dashed"
         borderColor="white"
@@ -23,12 +24,14 @@ const Game = () => {
           fontWeight="bold"
           bg="transparent"
           fontFamily="mono"
+          color="green.500"
+          fontSize="xl"
         >
           TARGET
         </Text>
         <Text
           bg="transparent"
-          fontSize={["8xl", "9xl", "9xl"]}
+          fontSize={"8xl"}
           w="full"
           textAlign="center"
           fontFamily="funt"
@@ -40,8 +43,14 @@ const Game = () => {
         </Text>
       </Box>
       <Box></Box>
-      <Box bg="transparent">
-        <HStack mx="auto" align="center" justify="center" bg="transparent">
+      <VStack bg="transparent" spacing={[2, 5]}>
+        <HStack
+          mx="auto"
+          align="center"
+          justify="center"
+          bg="transparent"
+          spacing={[1, 2, 3]}
+        >
           <StartingNumber value={100} />
           <StartingNumber value={75} />
           <StartingNumber value={8} />
@@ -49,7 +58,14 @@ const Game = () => {
           <StartingNumber value={10} />
           <StartingNumber value={6} />
         </HStack>
-      </Box>
+        <SumPane
+          sum={{
+            leftNumber: 100,
+            rightNumber: undefined,
+            operator: undefined,
+          }}
+        />
+      </VStack>
     </Container>
   );
 };

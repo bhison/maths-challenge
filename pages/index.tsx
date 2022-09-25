@@ -6,25 +6,26 @@ const IndexPage = () => {
   return (
     <>
       <Head>
-        <title>The Great Funt.im Maths Challenge</title>
+        <title>CLQL8</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="shortcut icon" href="/images/favicon.ico" />
       </Head>
       <Container
         mt="5"
-        maxW={["90vw", "container.lg", "container.xl"]}
+        maxW={["90vw"]}
         h="93vh"
         p={0}
-        bgGradient="linear(to-r, green.200, pink.500)"
+        bgGradient="linear(to-r, green.300, pink.300)"
         borderRadius="md"
         shadow="2xl"
       >
         <Heading
           w="full"
-          py={4}
+          py={[1, 2, 4]}
           textAlign="center"
           color="blue.400"
           bg="whiteAlpha.800"
-          size="2xl"
+          size={"md"}
           fontStyle="italic"
           fontFamily="mono"
           borderBottom="8px"
@@ -34,7 +35,7 @@ const IndexPage = () => {
         </Heading>
         <Game />
       </Container>
-      <Text w="full" textAlign="center" fontFamily="funt" fontSize="3xl">
+      <Text w="full" textAlign="center" fontFamily="funt">
         Funt.im 🤙
       </Text>
     </>
