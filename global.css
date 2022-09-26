@@ -17,3 +17,7 @@ body, html, #__next{
     background-color: rgb(192, 255, 234) !important;
 
 }
+
+.underline {
+  text-decoration-line: underline;
+}

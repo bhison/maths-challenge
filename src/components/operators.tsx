@@ -2,26 +2,37 @@ import { Button, HStack } from "@chakra-ui/react";
 import InputManager from "helpers/inputManager";
 import { useMemo } from "react";
 import { FaDivide, FaMinus, FaPlus, FaTimes } from "react-icons/fa";
-import { operator, sum } from "types";
+import { Operator, Sum } from "types";
 
 const OperatorButton = ({
   operator,
   enabled,
   onSelect,
+  selected,
 }: {
-  operator: operator;
+  operator: Operator;
   enabled: boolean;
   onSelect: () => void;
+  selected: boolean;
 }) => {
   return (
     <Button
       disabled={!enabled}
-      textColor="black"
+      textColor={selected ? "white" : "black"}
+      bg={selected ? "blue.700" : "white"}
       fontSize="2xl"
-      w={enabled ? ["10", "12", "16"] : ["3", "4"]}
-      h={enabled ? ["8", "10", "12"] : ["5", "6"]}
+      w={["10", "12", "16"]}
+      h={["8", "10", "12"]}
       shadow={"md"}
       onClick={onSelect}
+      _hover={
+        !enabled ? {} : selected ? { bg: "blue.800" } : { bg: "blue.100" }
+      }
+      _active={
+        !enabled
+          ? { bg: "red.900", textColor: "gray.700" }
+          : { bg: "blue.600", textColor: "white" }
+      }
     >
       {operator === "add" ? (
         <FaPlus />
@@ -42,11 +53,11 @@ const Operators = ({
   currentSum,
   setCurrentSum,
 }: {
-  currentSum: sum;
-  setCurrentSum: (val: sum) => void;
+  currentSum: Sum;
+  setCurrentSum: (val: Sum) => void;
 }) => {
   const enabled = useMemo(
-    () => !!currentSum.leftNumber && !currentSum.operator,
+    () => !!currentSum.leftNumber && !currentSum.rightNumber,
     [currentSum]
   );
   return (
@@ -58,10 +69,10 @@ const Operators = ({
       p="2"
       fontSize="2xl"
       justify="center"
-      spacing={enabled ? ["3", "4", "5"] : "1"}
+      spacing={["3", "4", "5"]}
     >
-      {(["add", "subtract", "multiply", "divide"] as operator[]).map(
-        (operator: operator) => (
+      {(["add", "subtract", "multiply", "divide"] as Operator[]).map(
+        (operator: Operator) => (
           <OperatorButton
             key={operator}
             operator={operator}
@@ -73,6 +84,7 @@ const Operators = ({
                 inputValue: operator,
               });
             }}
+            selected={currentSum.operator === operator}
           />
         )
       )}

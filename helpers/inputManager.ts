@@ -1,22 +1,26 @@
-import { operator, sum } from "types";
-const operators: operator[] = ["add", "subtract", "divide", "multiply"];
+import { GameNumber, Operator, Sum } from "types";
+const operators: Operator[] = ["add", "subtract", "divide", "multiply"];
 
 const InputManager = ({
   activeSum,
   setActiveSum,
   inputValue,
 }: {
-  activeSum: sum;
-  setActiveSum: (sum: sum) => void;
-  inputValue: number | operator;
+  activeSum: Sum;
+  setActiveSum: (sum: Sum) => void;
+  inputValue: GameNumber | Operator;
 }) => {
   if ((operators as any[]).includes(inputValue)) {
-    setActiveSum({ ...activeSum, operator: inputValue as operator });
-  } else {
-    if (activeSum.leftNumber) {
-      setActiveSum({ ...activeSum, rightNumber: inputValue as number });
+    if (inputValue === activeSum.operator) {
+      setActiveSum({ ...activeSum, operator: undefined });
     } else {
-      setActiveSum({ ...activeSum, leftNumber: inputValue as number });
+      setActiveSum({ ...activeSum, operator: inputValue as Operator });
+    }
+  } else {
+    if (!activeSum.operator) {
+      setActiveSum({ ...activeSum, leftNumber: inputValue as GameNumber });
+    } else {
+      setActiveSum({ ...activeSum, rightNumber: inputValue as GameNumber });
     }
   }
 };
